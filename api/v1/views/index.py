@@ -31,6 +31,6 @@ def stats():
         "users": User
     }
     res = {}
-    for k, v in cls_mapper:
+    for k, v in cls_mapper.items():
         res[k] = storage.count(v)
     return jsonify(res)
