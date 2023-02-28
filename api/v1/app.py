@@ -14,12 +14,6 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 app.register_blueprint(app_views)
 
-@app.teardown_appcontext
-def teardown(execute):
-    """Removes the current SQLAlchemy session after each request
-    is completed"""
-    storage.close()
-
 @app.errorhandler(404)
 def page_not_found(error):
     """
@@ -27,6 +21,12 @@ def page_not_found(error):
     a JSON-formatted 404 status code response.
     """
     return make_response(jsonify({'error': 'Not found'}), 404)
+
+@app.teardown_appcontext
+def teardown(execute):
+    """Removes the current SQLAlchemy session after each request
+    is completed"""
+    storage.close()
 
     
 if __name__ == "__main__":
