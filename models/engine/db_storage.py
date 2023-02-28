@@ -90,8 +90,7 @@ class DBStorage:
             return len(self.all())
         else:
             counter = 0
-            c = eval(cls)
             for obj in self.all().values():
-                if type(c) == obj:
+                if type(obj) == cls:
                     counter += 1
             return counter
