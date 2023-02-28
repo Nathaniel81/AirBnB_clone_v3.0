@@ -19,7 +19,7 @@ def show_status():
     """An end point to retrive "OK" status as a response"""
     return jsonify({"status": "OK"})
 
-@app_views.route('/stats', method=['GET'])
+@app_views.route('/stats', methods=['GET'])
 def stats():
     """Retrieves the number of each objects by type"""
     cls_mapper = {
