@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-"""Doc"""
+"""
+This is a Flask web application that serves as an API endpoint, 
+connecting to a database and running on the specified host and port. 
+It uses the models module and registers the app_views blueprint.
+"""
 
 from flask import Flask
 from models import storage
@@ -12,6 +16,8 @@ app.register_blueprint(app_views)
 
 @app.teardown_appcontext
 def teardown(execute):
+    """Removes the current SQLAlchemy session after each request
+    is completed"""
     storage.close()
     
 if __name__ == "__main__":
