@@ -85,6 +85,6 @@ class FileStorage:
         else:
             counter = 0
             for obj in self.all().values():
-                if type(cls) == obj:
+                if type(obj) == cls:
                     counter += 1
             return counter
