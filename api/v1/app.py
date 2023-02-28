@@ -19,12 +19,13 @@ def teardown(execute):
     """Removes the current SQLAlchemy session after each request
     is completed"""
     storage.close()
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
     
 if __name__ == "__main__":
     app.run(host=getenv('HBNB_API_HOST', '0.0.0.0'),
             port=getenv('HBNB_API_PORT', 5000),
             threaded=True, debug=True)
-
-    @app.errorhandler(404)
-    def page_not_found(error):
-        return make_response(jsonify({'error': 'Not found'}), 404)
