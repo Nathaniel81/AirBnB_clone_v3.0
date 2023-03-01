@@ -40,7 +40,7 @@ def state_wID(state_id=None):
         return jsonify({}), 200
 
     if request.method == 'PUT':
-        sent_data = request.get_json
+        sent_data = request.get_json()
         if sent_data is None:
             abort(400, 'Not a JSON')
         for k, v in sent_data.items():
