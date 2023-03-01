@@ -9,7 +9,5 @@ from flask import request, jsonify
 def all_state():
     """ """
     if request.method == 'GET':
-        st_list = []
-        for o in storage.all('State').values().to_dict():
-            st_list.append(o)
-        return jsonify(st_list)
+        states = [o.to_dict() for o in storage.all(State).values()]
+        return jsonify(states)
