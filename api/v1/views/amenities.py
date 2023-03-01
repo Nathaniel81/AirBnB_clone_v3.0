@@ -23,6 +23,8 @@ def get_amenities():
      along with a 201 status code if successful.
     """
     a = storage.all(Amenity)
+    if a is None:
+        abort(404)
     if request.method == 'GET':
         amenities = [o.to_dict() for o in a.values()]
         return jsonify(amenities)

@@ -46,17 +46,19 @@ def get_user_by_id(user_id=None):
 	PUT: Updates User object with request data, 
  	saves to storage, and returns updated object in JSON.
     """
-    a = storage.get(User, user_id)
+    u = storage.get(User, user_id)
+    if u is None:
+        abort(404)
     if request.method == 'GET':
-        return jsonify(a.to_dict())
+        return jsonify(u.to_dict())
     if request.method == 'DELETE':
-        storage.delete(a)
+        storage.delete(u)
         storage.save()
         return jsonify({})
     if request.method == 'PUT':
         sent_data = request.get_json()
         for k, v in sent_data.items():
             if k not in ['id', 'created_at', 'updated_at']:
-                setattr(a, k, v)
-        a.save()
-        return jsonify(a.to_dict())
+                setattr(u, k, v)
+        u.save()
+        return jsonify(u.to_dict())
