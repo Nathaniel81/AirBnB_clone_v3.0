@@ -55,6 +55,8 @@ def get_amenity_by_id(amenity_id=None):
         return jsonify({})
     if request.method == 'PUT':
         sent_data = request.get_json()
+        if sent_data is None:
+            abort(400, 'Not a JSON')
         for k, v in sent_data.items():
             if k not in ['id', 'created_at', 'updated_at']:
                 setattr(a, k, v)
