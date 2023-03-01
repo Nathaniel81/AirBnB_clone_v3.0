@@ -33,7 +33,8 @@ def get_cities_by_state(state_id=None):
         #sent_data = {"name": "Alexandria"}
         sent_data['state_id'] = state_id
         new_city = City(**sent_data)
-        new_city.save()
+        storage.new(new_city)
+        storage.save()
         return jsonify(new_city.to_dict()), 201
 
 @app_views.route('/cities/<city_id>', methods=['GET', 'DELETE', 'PUT'])
